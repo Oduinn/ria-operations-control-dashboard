@@ -2,16 +2,16 @@
 Power BI portfolio dashboard simulating RIA operations control reporting, including service request backlog, client follow-ups, AUM reconciliation, operational exceptions, and compliance evidence tracking using synthetic wealth management operations data.
 
 
-RIA Operations Control Dashboard
+### RIA Operations Control Dashboard
 Client Onboarding, Account Maintenance & Compliance Exceptions
 
 
-Project Overview
+## Project Overview
 This project is a Power BI portfolio dashboard designed to simulate an operations control report for a Registered Investment Adviser (RIA). The report tracks service request workload, client follow-up activity, AUM/revenue reconciliation, operational exceptions, and compliance task exceptions across a synthetic RIA operations dataset.
 The purpose of the project is to demonstrate how Power BI can be used to monitor operational risk, service-level performance, data quality issues, compliance evidence gaps, and reconciliation controls in a wealth management operations environment.
 The report is structured as a multi-page operational control dashboard with executive-style KPI summaries, drilldown visuals, slicers, and exception-level detail tables.
 ________________________________________
-Business Problem
+## Business Problem
 RIA operations teams often need visibility into multiple control areas at once:
 •	Service request backlog and SLA risk
 •	Client follow-up tasks waiting on advisors, clients, or custodians
@@ -20,7 +20,7 @@ RIA operations teams often need visibility into multiple control areas at once:
 •	Compliance task evidence, overdue items, and missing documentation
 Without centralized reporting, these issues can be difficult to prioritize. This dashboard consolidates operational signals into a structured Power BI report that allows users to quickly identify workload bottlenecks, aging items, missing evidence, and exception trends.
 ________________________________________
-Report Objectives
+## Report Objectives
 The dashboard was designed to answer the following business questions:
 1.	Operations Overview
 o	How many requests are open?
@@ -45,7 +45,7 @@ o	Which tasks are missing required evidence?
 o	Which completed tasks are missing documentation?
 o	Which compliance categories have the largest overdue task volume?
 ________________________________________
-Dashboard Pages
+## Dashboard Pages
 1. RIA Operations Overview
 The Operations Overview page provides a high-level summary of service request health and backlog risk.
 Key components:
@@ -57,6 +57,7 @@ Key components:
 •	Open Operational Exceptions
 •	Open Requests by Request Type
 •	Advisor Workload & SLA Risk summary table
+
 Purpose:
 This page gives users a fast executive-level view of operational health. It highlights workload volume, SLA exposure, and the request types or advisors contributing most to backlog risk.
 ________________________________________
@@ -196,77 +197,9 @@ Example fields:
 •	Client Name
 
 
-Key DAX Measures
+## Key DAX Measures
 
-Below are examples of measures used in the report.
-
-Open Compliance Tasks
-Open Compliance Tasks =
-COALESCE (
-CALCULATE (
-COUNTROWS ( FactComplianceTasks ),
-FactComplianceTasks[Task Status] <> "Completed"),0)
-
-Missing Evidence Tasks
-Missing Evidence Tasks =
-CALCULATE (
-COUNTROWS ( FactComplianceTasks ),
-KEEPFILTERS ( FactComplianceTasks[Task Status] <> "Completed" ),
-KEEPFILTERS ( FactComplianceTasks[Evidence Attached] = FALSE() ))
-
-Overdue Compliance Tasks
-Overdue Compliance Tasks =
-CALCULATE (
-COUNTROWS ( FactComplianceTasks ),
-KEEPFILTERS ( FactComplianceTasks[Task Status] <> "Completed" ),
-KEEPFILTERS ( FactComplianceTasks[Due Date] < TODAY() ))
-
-Completed Tasks Missing Evidence
-Completed Tasks Missing Evidence =
-CALCULATE (
-COUNTROWS ( FactComplianceTasks ),
-FactComplianceTasks[Task Status] = "Completed",
-FactComplianceTasks[Evidence Attached] = FALSE())
-
-Follow Up Required
-Follow Up Required =
-CALCULATE (
-COUNTROWS ( FactServiceRequests ),
-KEEPFILTERS (
-FactServiceRequests[Request Status] IN {
-"Waiting on Client",
-"Waiting on Advisor",
-"Waiting on Custodian" }))
-
-Average Follow-Up Age
-Avg Follow-Up Age =
-AVERAGEX (
-FILTER (
-FactServiceRequests,
-FactServiceRequests[Request Status] IN {
-"Waiting on Client",
-"Waiting on Advisor",
-"Waiting on Custodian"
-}
-&& ISBLANK ( FactServiceRequests[Completed Date] )
-),
-DATEDIFF (
-FactServiceRequests[Created Date], TODAY(), DAY))
-
-Days From Detection
-Days From Detection =
-DATEDIFF (
-FactDataQualityExceptions[Detected Date], TODAY(), DAY)
-
-Ending AUM in Millions
-Ending AUM ($M) =
-DIVIDE (
-[Total Ending AUM],
-1000000)
-
-Net Flows
-Net Flows =
-SUM ( FactAUMRevenue[Inflows] ) - SUM ( FactAUMRevenue[Outflows] )
+Brief examples or link to docs/dax_measures.md.
 
 Report Design Decisions
 KPI-First Layout
@@ -358,7 +291,7 @@ ria-operations-control-dashboard/
 └── dax_measures.md
 
 
-Screenshots
+## Screenshots
 Operations Overview
 screenshots/01_operations_overview.png
  
@@ -376,13 +309,13 @@ Compliance Exceptions
 screenshots/05_compliance_exceptions.png
  
 
-How to Use This Report
+## How to Use This Report
 1.	Open the .pbix file in Power BI Desktop.
 2.	Use slicers at the top of each page to filter by date, advisor, request type, task name, custodian, or category.
 3.	Review KPI cards for summary-level operational health.
 4.	Use charts to identify workload, overdue, exception, or reconciliation drivers.
 5.	Use detail tables to review specific records requiring follow-up.
 
-Summary
+## Summary
 The RIA Operations Control Dashboard is a Power BI portfolio project that demonstrates how operational, compliance, and reconciliation data can be organized into an actionable control report for a wealth management operations environment.
 The report combines KPI summaries, workload analysis, aging calculations, exception tracking, compliance evidence monitoring, and reconciliation views into a single multi-page dashboard. It is designed to show practical Power BI reporting skills in a realistic RIA operations context.
