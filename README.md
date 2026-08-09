@@ -20,31 +20,6 @@ RIA operations teams often need visibility into multiple control areas at once:
 •	Compliance task evidence, overdue items, and missing documentation
 Without centralized reporting, these issues can be difficult to prioritize. This dashboard consolidates operational signals into a structured Power BI report that allows users to quickly identify workload bottlenecks, aging items, missing evidence, and exception trends.
 ________________________________________
-## Report Objectives
-The dashboard was designed to answer the following business questions:
-1.	Operations Overview
-o	How many requests are open?
-o	How many items are overdue?
-o	Which request types are driving operational workload?
-o	Which advisors have the highest SLA risk?
-2.	Client Review & Follow-Up Tracker
-o	Which client follow-ups are waiting on action?
-o	Who or what is blocking follow-up completion?
-o	Which client follow-ups are aging the longest?
-3.	AUM / Revenue Reconciliation
-o	What is the ending AUM trend over time?
-o	What is advisory fee revenue by advisor?
-o	Are there reconciliation variances or exceptions?
-4.	Operational Exceptions
-o	What operational exceptions are open?
-o	Which exception types and source systems are driving issue volume?
-o	Which exceptions have been aging the longest?
-5.	Compliance Exceptions
-o	Which compliance tasks are overdue?
-o	Which tasks are missing required evidence?
-o	Which completed tasks are missing documentation?
-o	Which compliance categories have the largest overdue task volume?
-________________________________________
 ## Dashboard Pages
 1. RIA Operations Overview
 The Operations Overview page provides a high-level summary of service request health and backlog risk.
@@ -116,7 +91,24 @@ Key components:
 Purpose:
 This page helps users identify compliance documentation gaps, overdue tasks, and completed tasks where required evidence is missing. It supports compliance task review and control validation.
 ________________________________________
-Dataset
+## Screenshots
+Operations Overview
+screenshots/01_operations_overview.png
+ 
+Client Review & Follow-Up Tracker
+screenshots/02_client_follow_up_tracker.png
+ 
+AUM / Revenue Reconciliation
+screenshots/03_aum_revenue_reconciliation.png
+ 
+Operational Exceptions
+screenshots/04_operational_exceptions.png
+ 
+
+Compliance Exceptions
+screenshots/05_compliance_exceptions.png
+________________________________________
+## Dataset
 This project uses a synthetic dataset modeled around common RIA operations workflows. The data was created for portfolio and demonstration purposes only.
 The dataset includes operational concepts such as:
 •	Service requests
@@ -136,7 +128,7 @@ The dataset includes operational concepts such as:
 •	Resolution statuses
 No real client, advisor, financial, or firm data is used.
 ________________________________________
-Data Model Summary
+## Data Model Summary
 The report is based on fact-style tables representing different operational domains:
 Service Request Data
 Used for:
@@ -195,43 +187,12 @@ Example fields:
 •	Days Overdue
 •	Advisor Name
 •	Client Name
-
-
+________________________________________
 ## Key DAX Measures
 
 Brief examples or link to docs/dax_measures.md.
 
-Report Design Decisions
-KPI-First Layout
-Each page uses KPI cards at the top to summarize key operational health indicators before moving into charts and detail tables. This structure mirrors common business reporting patterns where users first need a quick summary, then supporting detail.
-
-Simple Visual Structure
-The report intentionally avoids excessive visuals. Most pages use:
-•	KPI cards
-•	One to three core visuals
-•	A details table for actionability
-This keeps the report easy to scan and prevents dashboard clutter.
-
-Detail Tables for Traceability
-Operational and compliance dashboards include detail tables because summary visuals alone are not enough for control review. The tables allow users to review specific exception records, overdue tasks, and follow-up items.
-
-Slicers for User Filtering
-Slicers are included for reporting periods and key operational dimensions such as:
-•	Request Type
-•	Advisor
-•	Task Name
-•	Compliance Category
-•	Custodian
-•	Severity
-•	Resolution Status
-These slicers allow users to narrow the dashboard to a specific operational area, advisor, or time period.
-
-
-
-
-Simplified Financial Formatting
-AUM values were converted into millions using a dedicated measure to make the reconciliation table easier to read. The table uses a field label such as Ending AUM ($M) to represent values in millions without requiring long raw currency values in every row.
-Skills Demonstrated
+## Skills Demonstrated
 This project demonstrates the following Power BI and analytics skills:
 •	Power BI report development
 •	KPI dashboard design
@@ -289,24 +250,6 @@ ria-operations-control-dashboard/
 │
 └── documentation/
 └── dax_measures.md
-
-
-## Screenshots
-Operations Overview
-screenshots/01_operations_overview.png
- 
-Client Review & Follow-Up Tracker
-screenshots/02_client_follow_up_tracker.png
- 
-AUM / Revenue Reconciliation
-screenshots/03_aum_revenue_reconciliation.png
- 
-Operational Exceptions
-screenshots/04_operational_exceptions.png
- 
-
-Compliance Exceptions
-screenshots/05_compliance_exceptions.png
  
 
 ## How to Use This Report
